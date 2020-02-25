@@ -1,6 +1,5 @@
 #include <Windows.h>
 
-#include "Texture.h"
 #include "Letters.h"
 #include "WireManager.h"
 

@@ -89,6 +89,7 @@ int* Engine::GetSelNodes() {
 
 	if (j != 2) {
 		int* nums = NULL;
+		MessageBox(NULL, L"NUMSNULL", L"NUMSNULL", NULL);
 		return nums;
 	}
 	
