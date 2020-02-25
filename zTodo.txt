@@ -1,0 +1,14 @@
+Todo:
+	-Features:
+	 *Select multiple nodes (shift)						25-2
+	 *Deselect nodes without deselecting all (ctrl)		25-2
+	 *Shortcut for creating Wires						25-2
+	 *Realtime wire drawing
+	 *Toolbar
+	 *Text
+	 *Box select
+
+	-Working feature that needs optimizing
+	 *Wire manager works with limited amount of wires atm
+
+	-Bugs:
