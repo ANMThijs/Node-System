@@ -52,7 +52,8 @@ public:
 	int* GetSelNodes();
 	void SetVPMode(VPModes mode);
 
-	void OnLMouse();
+	void LMouseUp();
+	void LMouseDown();
 	void OnHotKey(WPARAM wparam);
 	void OnMouseMove();
 	void OnKey();

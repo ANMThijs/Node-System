@@ -3,10 +3,11 @@ Todo:
 	 *Select multiple nodes (shift)						25-2
 	 *Deselect nodes without deselecting all (ctrl)		25-2
 	 *Shortcut for creating Wires						25-2
-	 *Realtime wire drawing
+	 *Deleting wires									27-2
+	 *Realtime wire drawing								27-2
 	 *Toolbar
-	 *Text
 	 *Box select
+	 *Text
 	 *File system
 
 	-Bugs:

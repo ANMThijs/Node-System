@@ -6,6 +6,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 	HDC hdc = NULL;
 	HGLRC hrc = NULL;
 	switch (umsg) {
+	case WM_LBUTTONUP:
+		hdc = GetDC(hwnd);
+
+		eng.LMouseUp();
+
+		SwapBuffers(hdc);
+		break;
 	case WM_MOUSEMOVE:
 		hdc = GetDC(hwnd);
 
@@ -30,7 +37,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 	case WM_LBUTTONDOWN:
 		hdc = GetDC(hwnd);
 
-		eng.OnLMouse();
+		eng.LMouseDown();
 
 		SwapBuffers(hdc);
 		break;

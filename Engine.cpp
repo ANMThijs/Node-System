@@ -39,6 +39,7 @@ void Engine::Init() {
 	wm.AddWire(this->nodes[2], this->nodes[3]);
 	wm.AddWire(this->nodes[2], this->nodes[4]);
 	wm.AddWire(this->nodes[2], this->nodes[5]);*/
+	
 }
 
 void Engine::Destroy() {
@@ -78,6 +79,10 @@ void Engine::Render() {
 	glTranslatef(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT / 2.0f, 0.0f);
 
 	wm.DrawWires();
+
+	if (this->RealTimeWire.init == true) {
+		this->RealTimeWire.Draw();
+	}
 
 	for (int i = 0; i < nodecount; i++) {
 		nodes[i].Render();
@@ -121,7 +126,7 @@ void Engine::SetVPMode(VPModes mode) {
 	}
 }
 
-void Engine::OnLMouse() {
+void Engine::LMouseDown() {
 	POINT mouseposwin;				//win is the mouse position on the window,
 	GetCursorPos(&mouseposwin);
 
@@ -167,6 +172,38 @@ void Engine::OnLMouse() {
 	this->PrevMousePosGLY = this->OMousePosGLY;
 }
 
+void Engine::LMouseUp() {
+	if (this->currentmode == DrawWire) {
+		POINT mouseposwin;
+		float mouseposglx, mouseposgly;
+		GetCursorPos(&mouseposwin);
+
+		mouseposglx = mouseposwin.x - SCREEN_WIDTH / 2.0f;
+		mouseposgly = mouseposwin.y - SCREEN_HEIGHT / 2.0f + 6.0f;
+
+		int n1 = -1, n2 = -1;
+
+		this->RealTimeWire.init = false;
+		for (int i = 0; i < this->nodecount; i++) {
+			if (((this->nodes[i].xpos - 50.0f) <= this->OMousePosGLX) && ((this->nodes[i].xpos + 50.0f) >= this->OMousePosGLX)) {
+				if (((this->nodes[i].ypos - 50.0f) <= this->OMousePosGLY) && ((this->nodes[i].ypos + 50.0f) >= this->OMousePosGLY)) {
+					n1 = i;
+				}
+			}
+			else if (((this->nodes[i].xpos - 50.0f) <= mouseposglx) && ((this->nodes[i].xpos + 50.0f) >= mouseposglx)) {
+				if (((this->nodes[i].ypos - 50.0f) <= mouseposgly) && ((this->nodes[i].ypos + 50.0f) >= mouseposgly)) {
+					n2 = i;
+				}
+			}
+		}
+		if ((n1 != -1) && (n2 != -1)) {
+			this->wm.AddWire(this->nodes[n1], this->nodes[n2]);
+			printf("%i, %i\n", n1, n2);
+		}
+		this->Render();
+	}
+}
+
 void Engine::OnHotKey(WPARAM wparam) {
 	if (wparam == HK_VPMODE_DEFAULT)   this->SetVPMode(Default);
 	if (wparam == HK_VPMODE_DRAW_NODE) this->SetVPMode(DrawNode);
@@ -206,7 +243,7 @@ void Engine::OnMouseMove() {
 	else if (this->currentmode == DrawWire) {
 		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000) {
 			this->RealTimeWire.NewEnd(mouseposglx, mouseposgly);
-			this->RealTimeWire.Draw();
+			this->Render();
 		}
 	}
 

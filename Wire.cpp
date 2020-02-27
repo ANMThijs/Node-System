@@ -1,7 +1,7 @@
 #include "Wire.h"
 
 Wire::Wire() {
-
+	
 }
 
 void Wire::Init(float x1, float y1, float x2, float y2, int NodeID1, int NodeID2) {
@@ -12,8 +12,6 @@ void Wire::Init(float x1, float y1, float x2, float y2, int NodeID1, int NodeID2
 
 	this->NodeID1 = NodeID1;
 	this->NodeID2 = NodeID2;
-
-	this->init = true;
 }
 
 void Wire::InitRT(float x1, float y1, float x2, float y2) {
@@ -21,6 +19,8 @@ void Wire::InitRT(float x1, float y1, float x2, float y2) {
 	this->starty = y1;
 	this->endx = x2;
 	this->endy = y2;
+
+	this->init = true;
 }
 
 void Wire::NewStart(float x, float y) {
