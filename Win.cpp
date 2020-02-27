@@ -27,10 +27,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 
 		SwapBuffers(hdc);
 		break;
-	case WM_RBUTTONDOWN:
+	case WM_LBUTTONDOWN:
 		hdc = GetDC(hwnd);
 
-		eng.OnRMouse();
+		eng.OnLMouse();
 
 		SwapBuffers(hdc);
 		break;
@@ -62,14 +62,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 
 void SetHotKeys(HWND hwnd) {
 	RegisterHotKey(hwnd, HK_VPMODE_DEFAULT, MOD_ALT | MOD_CONTROL, 'D');
-	RegisterHotKey(hwnd, HK_VPMODE_DRAW, MOD_ALT | MOD_CONTROL, 'T');
+	RegisterHotKey(hwnd, HK_VPMODE_DRAW_NODE, MOD_ALT | MOD_CONTROL, 'T');
+	RegisterHotKey(hwnd, HK_VPMODE_DRAW_WIRE, MOD_ALT | MOD_CONTROL, 'W');
 	RegisterHotKey(hwnd, HK_DRAW_WIRE, MOD_CONTROL, 'W');
 	RegisterHotKey(hwnd, HK_SELECT_BOX, MOD_CONTROL, 'B');
 }
 
 void DelHotKeys(HWND hwnd) {
 	UnregisterHotKey(hwnd, HK_VPMODE_DEFAULT);
-	UnregisterHotKey(hwnd, HK_VPMODE_DRAW);
+	UnregisterHotKey(hwnd, HK_VPMODE_DRAW_NODE);
+	UnregisterHotKey(hwnd, HK_VPMODE_DRAW_WIRE);
 	UnregisterHotKey(hwnd, HK_DRAW_WIRE);
 	UnregisterHotKey(hwnd, HK_SELECT_BOX);
 }
@@ -122,7 +124,7 @@ HGLRC CreateGLCont(HWND hwnd) {
 		WGL_DEPTH_BITS_ARB, 24,
 		WGL_STENCIL_BITS_ARB, 8,
 		WGL_SAMPLE_BUFFERS_ARB, 1,
-		WGL_SAMPLES_ARB, 4,
+		WGL_SAMPLES_ARB, 0,
 		0
 	};
 

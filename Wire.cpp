@@ -16,6 +16,13 @@ void Wire::Init(float x1, float y1, float x2, float y2, int NodeID1, int NodeID2
 	this->init = true;
 }
 
+void Wire::InitRT(float x1, float y1, float x2, float y2) {
+	this->startx = x1;
+	this->starty = y1;
+	this->endx = x2;
+	this->endy = y2;
+}
+
 void Wire::NewStart(float x, float y) {
 	this->startx = x;
 	this->starty = y;
@@ -109,6 +116,96 @@ void Wire::Draw() {
 			else if (this->startx == this->endx) {
 				glVertex2f(this->startx, this->starty + 50.0f);
 				glVertex2f(this->endx, this->endy - 50.0f);
+			}
+		}
+	}
+
+	glEnd();
+}
+
+void Wire::Draw(float x1, float y1, float x2, float y2) {
+	float dx = x2 - x1;
+	float dy = y2 - y1;
+
+	glColor3f(0.3f, 0.3f, 0.7f);
+
+	glLineWidth(5.0f);
+
+	glBegin(GL_LINES);
+
+	if (dx > 100.0f || dx < -100.0f) {
+		if (x1 < x2) {
+			glVertex2f(x1 + 50.0f, y1);
+			glVertex2f(x1 + dx / 2 + 2.5f, y1);
+
+			glVertex2f(x1 + dx / 2, y1);
+			glVertex2f(x1 + dx / 2, y2);
+
+			glVertex2f(x1 + dx / 2 - 2.5f, y2);
+			glVertex2f(x2 - 50.0f, y2);
+		}
+		else if (x2 < x1) {
+			glVertex2f(x2 + 50.0f, y2);
+			glVertex2f(x2 - dx / 2 + 2.5f, y2);
+
+			glVertex2f(x2 - dx / 2, y2);
+			glVertex2f(x2 - dx / 2, y1);
+
+			glVertex2f(x2 - dx / 2 - 2.5f, y1);
+			glVertex2f(x1 - 50.0f, y1);
+		}
+	}
+	else {
+		if (y1 > y2) {
+			if (x1 < x2) {
+				glVertex2f(x1, y1 - 50.0f);
+				glVertex2f(x1, y1 + dy / 2 - 2.5f);
+
+				glVertex2f(x1, y1 + dy / 2);
+				glVertex2f(x2, y1 + dy / 2);
+
+				glVertex2f(x2, y1 + dy / 2 + 2.5f);
+				glVertex2f(x2, y2 + 50.0f);
+			}
+			else if (x2 < x1) {
+				glVertex2f(x1, y1 - 50.0f);
+				glVertex2f(x1, y1 + dy / 2 - 2.5f);
+
+				glVertex2f(x1, y1 + dy / 2);
+				glVertex2f(x2, y1 + dy / 2);
+
+				glVertex2f(x2, y1 + dy / 2 + 2.5f);
+				glVertex2f(x2, y2 + 50.0f);
+			}
+			else if (x1 == x2) {
+				glVertex2f(x1, y1 - 50.0f);
+				glVertex2f(x2, y2 + 50.0f);
+			}
+		}
+		else {
+			if (x1 < x2) {
+				glVertex2f(x1, y1 + 50.0f);
+				glVertex2f(x1, y1 + dy / 2 + 2.5f);
+
+				glVertex2f(x1, y1 + dy / 2);
+				glVertex2f(x2, y1 + dy / 2);
+
+				glVertex2f(x2, y1 + dy / 2 - 2.5f);
+				glVertex2f(x2, y2 - 50.0f);
+			}
+			else if (x2 < x1) {
+				glVertex2f(x1, y1 + 50.0f);
+				glVertex2f(x1, y1 + dy / 2 + 2.5f);
+
+				glVertex2f(x1, y1 + dy / 2);
+				glVertex2f(x2, y1 + dy / 2);
+
+				glVertex2f(x2, y1 + dy / 2 - 2.5f);
+				glVertex2f(x2, y2 - 50.0f);
+			}
+			else if (x1 == x2) {
+				glVertex2f(x1, y1 + 50.0f);
+				glVertex2f(x2, y2 - 50.0f);
 			}
 		}
 	}

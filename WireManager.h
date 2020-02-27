@@ -5,7 +5,7 @@
 class WireManager
 {
 private:
-	Wire wires[8];
+	Wire* wires;
 	int wirecount;
 
 public:
@@ -14,6 +14,8 @@ public:
 
 	void Init();
 	void AddWire(Node n1, Node n2);
+	void DeleteWire(Node n);
+	void DeleteWire(Node n1, Node n2);
 	void UpdateWires(Node n);
 	void DrawWires();
 };

@@ -4,9 +4,9 @@
 #include "WireManager.h"
 
 #define HK_VPMODE_DEFAULT 100
-#define HK_VPMODE_DRAW 101
-
-#define HK_DRAW_WIRE 105
+#define HK_VPMODE_DRAW_NODE 101
+#define HK_VPMODE_DRAW_WIRE 102		//For realtime drawing
+#define HK_DRAW_WIRE 105			//For shortcut drawing
 
 #define HK_SELECT_BOX 110
 
@@ -20,7 +20,8 @@
 
 enum VPModes {
 	Default = 0,
-	Draw = 1,
+	DrawNode = 1,
+	DrawWire = 2,
 };
 
 class Engine
@@ -28,11 +29,12 @@ class Engine
 private:
 	Node* nodes;
 	WireManager wm;
+	Wire RealTimeWire;
 
 	int nodecount; //starts at 1
 	int nodesel;   //starts at 0. Set to -1 if no nodes are selected
 	int currentmode;
-	float OMousePosGLX, OMousePosGLY; //Get's set when rbutton is pushed, used for node movement
+	float OMousePosGLX, OMousePosGLY; //Gets set when mouse button is clicked
 	float PrevMousePosGLX, PrevMousePosGLY;
 
 public:
@@ -48,8 +50,9 @@ public:
 	void Render();
 
 	int* GetSelNodes();
+	void SetVPMode(VPModes mode);
 
-	void OnRMouse();
+	void OnLMouse();
 	void OnHotKey(WPARAM wparam);
 	void OnMouseMove();
 	void OnKey();

@@ -23,6 +23,8 @@ Node::Node(float x, float y) {
 }
 
 void Node::Render() {
+	float nsize = NODE_SIZE / 2;
+
 	glBegin(GL_TRIANGLES);
 
 	if (this->selected == true) {
@@ -31,13 +33,13 @@ void Node::Render() {
 	else if (this->selected == false) {
 		glColor3f(NODE_COLOURR_DEF, NODE_COLOURG_DEF, NODE_COLOURB_DEF);
 	}
-	glVertex2f(this->xpos - 50.f, this->ypos - 50.f);
-	glVertex2f(this->xpos + 50.f, this->ypos - 50.f);
-	glVertex2f(this->xpos + 50.f, this->ypos + 50.f);
+	glVertex2f(this->xpos - nsize, this->ypos - nsize);
+	glVertex2f(this->xpos + nsize, this->ypos - nsize);
+	glVertex2f(this->xpos + nsize, this->ypos + nsize);
 	
-	glVertex2f(this->xpos - 50.f, this->ypos - 50.f);
-	glVertex2f(this->xpos + 50.f, this->ypos + 50.f);
-	glVertex2f(this->xpos - 50.f, this->ypos + 50.f);
+	glVertex2f(this->xpos - nsize, this->ypos - nsize);
+	glVertex2f(this->xpos + nsize, this->ypos + nsize);
+	glVertex2f(this->xpos - nsize, this->ypos + nsize);
 	glEnd();
 }
 
