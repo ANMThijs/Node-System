@@ -24,21 +24,21 @@ void Engine::Init() {
 	this->nodecount = 0;
 	this->nodesel = -1;
 
-	this->AddNode(440.0f, 234.0f);
+/*	this->AddNode(440.0f, 234.0f);
 	this->AddNode(240.0f, 342.0f);
 
 	this->AddNode(0.0f, 350.0f);
 	this->AddNode(733.0f, -260.0f);
 	this->AddNode(-780.0f, 80.0f);
-	this->AddNode(-504.0f, 452.0f);
+	this->AddNode(-504.0f, 452.0f);*/
 
 	this->currentmode = Default;
 
 	wm.Init();
-	wm.AddWire(this->nodes[0], this->nodes[1]);
+/*	wm.AddWire(this->nodes[0], this->nodes[1]);
 	wm.AddWire(this->nodes[2], this->nodes[3]);
 	wm.AddWire(this->nodes[2], this->nodes[4]);
-	wm.AddWire(this->nodes[2], this->nodes[5]);
+	wm.AddWire(this->nodes[2], this->nodes[5]);*/
 }
 
 void Engine::Destroy() {
