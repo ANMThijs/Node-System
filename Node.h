@@ -1,7 +1,7 @@
 #pragma once
 #include <gl/glew.h>
 
-#define NODE_SIZE 50.0f
+#define NODE_SIZE 100.0f
 
 #define NODE_COLOURR_DEF 0.2f
 #define NODE_COLOURG_DEF 0.2f
