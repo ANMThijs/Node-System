@@ -11,4 +11,4 @@ Todo:
 	 *File system
 
 	-Bugs:
-	 *When a node with a wire is deleted the wire is still visible
+	 *Clicking stacked nodes selects both

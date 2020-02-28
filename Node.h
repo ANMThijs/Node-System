@@ -16,7 +16,7 @@ class Node
 public:
 	float xpos, ypos;
 	float colourr, colourg, colourb;
-	bool selected, deleted;
+	bool selected;
 	int ID;
 
 	Node();

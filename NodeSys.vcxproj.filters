@@ -39,6 +39,9 @@
     <ClCompile Include="WireManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShapePresets.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="WireManager.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapePresets.h">
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 
 #include "Letters.h"
 #include "WireManager.h"
+#include "ShapePresets.h"
 
 #define HK_VPMODE_DEFAULT 100
 #define HK_VPMODE_DRAW_NODE 101
@@ -37,6 +38,8 @@ private:
 	float OMousePosGLX, OMousePosGLY; //Gets set when mouse button is clicked
 	float PrevMousePosGLX, PrevMousePosGLY;
 
+	bool nodeclicked, selbox;
+
 public:
 	Engine();
 	~Engine();
@@ -47,9 +50,11 @@ public:
 	void AddNode(Node n); //Adds a node which is already defined
 	void AddNode(float xpos, float ypos); //Adds a node based off coordinates
 	void DeleteNode(); //Delete the current selected node
+	void DeleteNode(int NodeID);
 	void Render();
 
 	int* GetSelNodes();
+	int* GetSelNodesW();
 	void SetVPMode(VPModes mode);
 
 	void LMouseUp();
@@ -58,4 +63,3 @@ public:
 	void OnMouseMove();
 	void OnKey();
 };
-

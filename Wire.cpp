@@ -221,12 +221,3 @@ Wire* CopyWires(int wirecount, Wire* wires) {
 
 	return wire;
 }
-
-/*Wire& Wire::operator=(const Wire* w) {
-	this->startx = w->startx;
-	this->starty = w->starty;
-	this->endx = w->endx;
-	this->endy = w->endy;
-
-	return *this;
-}*/

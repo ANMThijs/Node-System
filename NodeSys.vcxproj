@@ -142,6 +142,7 @@
     <ClCompile Include="Letters.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="ShapePresets.cpp" />
     <ClCompile Include="Win.cpp" />
     <ClCompile Include="Wire.cpp" />
     <ClCompile Include="WireManager.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Letters.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="ShapePresets.h" />
     <ClInclude Include="Win.h" />
     <ClInclude Include="Wire.h" />
     <ClInclude Include="WireManager.h" />

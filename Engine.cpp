@@ -24,6 +24,9 @@ void Engine::Init() {
 	this->nodecount = 0;
 	this->nodesel = -1;
 
+	this->nodeclicked = false;
+	this->selbox = false;
+
 /*	this->AddNode(440.0f, 234.0f);
 	this->AddNode(240.0f, 342.0f);
 
@@ -60,10 +63,19 @@ void Engine::AddNode(float xpos, float ypos) {
 }
 
 void Engine::DeleteNode() {
-	this->nodes[this->nodesel].deleted = true;
 	this->wm.DeleteWire(this->nodes[this->nodesel]);
 	for (int i = 0; i < (this->nodecount - 1); i++) {
 		if (i >= this->nodesel) {
+			this->nodes[i] = this->nodes[i + 1];
+		}
+	}
+	this->nodecount--;
+}
+
+void Engine::DeleteNode(int NodeID) {
+	this->wm.DeleteWire(this->nodes[NodeID]);
+	for (int i = 0; i < (this->nodecount - 1); i++) {
+		if (i >= NodeID) {
 			this->nodes[i] = this->nodes[i + 1];
 		}
 	}
@@ -84,6 +96,10 @@ void Engine::Render() {
 		this->RealTimeWire.Draw();
 	}
 
+	if (this->selbox == true) {
+		DrawRect(this->OMousePosGLY, this->PrevMousePosGLX, this->PrevMousePosGLY, this->OMousePosGLX);
+	}
+
 	for (int i = 0; i < nodecount; i++) {
 		nodes[i].Render();
 	}
@@ -97,14 +113,35 @@ int* Engine::GetSelNodes() {
 			j++;
 		}
 	}
+	
+	int* nums = new int[j];
+	int m = 0;
+	/*Get the array numbers of the selected nodes*/
+
+	for (int i = 0; i < this->nodecount; i++) {
+		if (this->nodes[i].selected == true) {
+			nums[m] = i;
+			m++;
+		}
+	}
+	return nums;
+}
+
+int* Engine::GetSelNodesW() {
+	int j = 0;
+	/*Get amount of selected nodes*/
+	for (int i = 0; i < this->nodecount; i++) {
+		if (this->nodes[i].selected == true) {
+			j++;
+		}
+	}
 
 	if (j != 2) {
 		int* nums = NULL;
-		MessageBox(NULL, L"NUMSNULL", L"NUMSNULL", NULL);
 		return nums;
 	}
-	
-	int nums[2];
+
+	int* nums = new int[2];
 	int m = 0;
 	/*Get the array numbers of the selected nodes*/
 
@@ -138,6 +175,7 @@ void Engine::LMouseDown() {
 		for (int i = 0; i < this->nodecount; i++) {
 			if (((this->nodes[i].xpos - 50.0f) <= this->OMousePosGLX) && ((this->nodes[i].xpos + 50.0f) >= this->OMousePosGLX)) {
 				if (((this->nodes[i].ypos - 50.0f) <= this->OMousePosGLY) && ((this->nodes[i].ypos + 50.0f) >= this->OMousePosGLY)) {
+					this->nodeclicked = true;
 					if (GetKeyState(VK_SHIFT) & 0x8000) {
 						if (this->nodes[i].selected == false) {
 							this->nodes[i].selected = true;
@@ -158,6 +196,12 @@ void Engine::LMouseDown() {
 				}
 			}
 		}
+		if (this->nodeclicked == false) {
+			for (int i = 0; i < this->nodecount; i++) {
+				this->nodes[i].selected = false;
+				this->nodesel = -1;
+			}
+		}
 	}
 	else if (this->currentmode == DrawNode) {
 		this->AddNode(this->OMousePosGLX, this->OMousePosGLY);
@@ -173,6 +217,21 @@ void Engine::LMouseDown() {
 }
 
 void Engine::LMouseUp() {
+	if (this->currentmode == Default) {
+		for (int i = 0; i < this->nodecount; i++) {
+			if (this->nodes[i].xpos > this->OMousePosGLX && this->nodes[i].xpos < this->PrevMousePosGLX) {
+				if (this->nodes[i].ypos > this->OMousePosGLY&& this->nodes[i].ypos < this->PrevMousePosGLY) {
+					this->nodes[i].selected = true;
+				}
+			}
+			else if (this->nodes[i].xpos < this->OMousePosGLX&& this->nodes[i].xpos > this->PrevMousePosGLX) {
+				if (this->nodes[i].ypos < this->OMousePosGLY&& this->nodes[i].ypos > this->PrevMousePosGLY) {
+					this->nodes[i].selected = true;
+				}
+			}
+		}
+		this->Render();
+	}
 	if (this->currentmode == DrawWire) {
 		POINT mouseposwin;
 		float mouseposglx, mouseposgly;
@@ -200,8 +259,12 @@ void Engine::LMouseUp() {
 			this->wm.AddWire(this->nodes[n1], this->nodes[n2]);
 			printf("%i, %i\n", n1, n2);
 		}
-		this->Render();
 	}
+
+	this->nodeclicked = false;
+	this->selbox = false;
+
+	this->Render();
 }
 
 void Engine::OnHotKey(WPARAM wparam) {
@@ -210,7 +273,7 @@ void Engine::OnHotKey(WPARAM wparam) {
 	if (wparam == HK_VPMODE_DRAW_WIRE) this->SetVPMode(DrawWire);
 	if (wparam == HK_DRAW_WIRE) {
 		int* selnodes;
-		selnodes = this->GetSelNodes();
+		selnodes = this->GetSelNodesW();
 		if (selnodes != NULL) {
 			this->wm.AddWire(this->nodes[selnodes[0]], this->nodes[selnodes[1]]);
 		}
@@ -226,6 +289,8 @@ void Engine::OnMouseMove() {
 	mouseposglx = mouseposwin.x - SCREEN_WIDTH / 2.0f;
 	mouseposgly = mouseposwin.y - SCREEN_HEIGHT / 2.0f + 6.0f;
 
+	int sel = 0;
+
 	if (this->currentmode == Default) {
 		if (GetAsyncKeyState(VK_LBUTTON) & 0x8000) {
 			for (int i = 0; i < this->nodecount; i++) {
@@ -236,7 +301,13 @@ void Engine::OnMouseMove() {
 					this->nodes[i].Move(dx, dy);
 					this->wm.UpdateWires(this->nodes[i]);
 					this->Render(); //Placed here so it is only called when necessary
+
+					sel = 1;
 				}
+			}
+			if (this->nodeclicked == false) {
+				this->selbox = true;
+				this->Render();
 			}
 		}
 	}
@@ -249,6 +320,8 @@ void Engine::OnMouseMove() {
 
 	this->PrevMousePosGLX = mouseposglx;
 	this->PrevMousePosGLY = mouseposgly;
+
+	sel = 0;
 }
 
 void Engine::OnKey() {
@@ -261,12 +334,14 @@ void Engine::OnKey() {
 			}
 		}
 		if (selnodec == 1) {
-			DeleteNode();
+			this->DeleteNode();
 		}
-		else if (selnodec == 2) {
+		else if (selnodec > 1) {
 			int* selnodes;
 			selnodes = this->GetSelNodes();
-			this->wm.DeleteWire(this->nodes[selnodes[0]], this->nodes[selnodes[1]]);
+			for (int i = 0; i < selnodec; i++) {
+				this->DeleteNode(selnodes[i]);
+			}
 		}
 		this->Render();
 	}
