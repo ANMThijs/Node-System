@@ -21,13 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_16427D1F107843D5BB3B97C97C0EB3E6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_78F95748E57D4CF99435782006D54AB9"
+        "MsmKey" = "8:_22FB26FBFDB948CFA0AD81067687A45A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,6 +34,12 @@
         "Entry"
         {
         "MsmKey" = "8:_8BE6B0CA99364D52B6DBE1F73E8D5FEA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E6661AEA495943BFB60F6AEC8E38B804"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -61,6 +61,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -77,6 +93,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -118,27 +142,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_16427D1F107843D5BB3B97C97C0EB3E6"
-            {
-            "SourcePath" = "8:..\\NodeSys\\Debug\\glew32d.dll"
-            "TargetName" = "8:glew32d.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_5D285CFC93934510995F33E94CC5408D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_78F95748E57D4CF99435782006D54AB9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_22FB26FBFDB948CFA0AD81067687A45A"
             {
             "SourcePath" = "8:D:\\Downloads\\DLL's\\ucrtbased.dll"
             "TargetName" = "8:ucrtbased.dll"
@@ -162,6 +166,26 @@
             {
             "SourcePath" = "8:D:\\Downloads\\DLL's\\msvcp140d.dll"
             "TargetName" = "8:msvcp140d.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_5D285CFC93934510995F33E94CC5408D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E6661AEA495943BFB60F6AEC8E38B804"
+            {
+            "SourcePath" = "8:..\\Debug\\glew32d.dll"
+            "TargetName" = "8:glew32d.dll"
             "Tag" = "8:"
             "Folder" = "8:_5D285CFC93934510995F33E94CC5408D"
             "Condition" = "8:"
@@ -235,7 +259,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:NodeSys"
         "ProductCode" = "8:{C4430783-C7DF-4D18-BAB1-3113012E47BB}"
-        "PackageCode" = "8:{66C7EF8E-7FA3-4180-A8E3-7DC1B6EA52FA}"
+        "PackageCode" = "8:{03965B7E-C679-40B8-BB43-1B870EDBBBDC}"
         "UpgradeCode" = "8:{2ACC5AB3-89E2-4AC2-88CA-9B0D55ED12CC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -784,7 +808,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_89DABF5F7E7C4C3E8BD95C6868E78BCF"
             {
-            "SourcePath" = "8:..\\NodeSys\\Debug\\NodeSys.exe"
+            "SourcePath" = "8:..\\Debug\\NodeSys.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_5D285CFC93934510995F33E94CC5408D"

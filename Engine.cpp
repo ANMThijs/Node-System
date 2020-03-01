@@ -27,22 +27,11 @@ void Engine::Init() {
 	this->nodeclicked = false;
 	this->selbox = false;
 
-/*	this->AddNode(440.0f, 234.0f);
-	this->AddNode(240.0f, 342.0f);
-
-	this->AddNode(0.0f, 350.0f);
-	this->AddNode(733.0f, -260.0f);
-	this->AddNode(-780.0f, 80.0f);
-	this->AddNode(-504.0f, 452.0f);*/
-
 	this->currentmode = Default;
 
-	wm.Init();
-/*	wm.AddWire(this->nodes[0], this->nodes[1]);
-	wm.AddWire(this->nodes[2], this->nodes[3]);
-	wm.AddWire(this->nodes[2], this->nodes[4]);
-	wm.AddWire(this->nodes[2], this->nodes[5]);*/
-	
+	this->wm.Init();
+
+	this->tb.Init();
 }
 
 void Engine::Destroy() {
@@ -103,6 +92,8 @@ void Engine::Render() {
 	for (int i = 0; i < nodecount; i++) {
 		nodes[i].Render();
 	}
+
+	this->tb.Render();
 }
 
 int* Engine::GetSelNodes() {
@@ -170,7 +161,19 @@ void Engine::LMouseDown() {
 	this->OMousePosGLX = mouseposwin.x - SCREEN_WIDTH / 2.0f;
 	this->OMousePosGLY = mouseposwin.y - SCREEN_HEIGHT / 2.0f + 6.0f; //-6.0f so mousepos is at the top of cursor icon
 
-	if (this->currentmode == Default) {
+	bool Tbclicked = false;
+	if (this->tb.DetectMouse(this->OMousePosGLX, this->OMousePosGLY)) {
+		int tbb = this->tb.Toolbarproc(this->OMousePosGLX, this->OMousePosGLY);
+		switch (tbb) {
+		case -1: break;
+		case 0: SetVPMode(Default); break;
+		case 1: SetVPMode(DrawNode); break;
+		case 2: SetVPMode(DrawWire); break;
+		}
+		Tbclicked = true;
+	}
+
+	if ((this->currentmode == Default) && (!Tbclicked)) {
 		/*Check if mousepos is on a node, by loping through all the nodes*/
 		for (int i = 0; i < this->nodecount; i++) {
 			if (((this->nodes[i].xpos - 50.0f) <= this->OMousePosGLX) && ((this->nodes[i].xpos + 50.0f) >= this->OMousePosGLX)) {
@@ -203,10 +206,10 @@ void Engine::LMouseDown() {
 			}
 		}
 	}
-	else if (this->currentmode == DrawNode) {
+	else if ((this->currentmode == DrawNode) && (!Tbclicked)) {
 		this->AddNode(this->OMousePosGLX, this->OMousePosGLY);
 	}
-	else if (this->currentmode == DrawWire) {
+	else if ((this->currentmode == DrawWire) && (!Tbclicked)) {
 		this->RealTimeWire.InitRT(this->OMousePosGLX, this->OMousePosGLY, this->OMousePosGLX, this->OMousePosGLY);
 	}
 
@@ -346,3 +349,17 @@ void Engine::OnKey() {
 		this->Render();
 	}
 }
+
+
+/*	wm.AddWire(this->nodes[0], this->nodes[1]);
+	wm.AddWire(this->nodes[2], this->nodes[3]);
+	wm.AddWire(this->nodes[2], this->nodes[4]);
+	wm.AddWire(this->nodes[2], this->nodes[5]);*/
+
+	/*	this->AddNode(440.0f, 234.0f);
+		this->AddNode(240.0f, 342.0f);
+
+		this->AddNode(0.0f, 350.0f);
+		this->AddNode(733.0f, -260.0f);
+		this->AddNode(-780.0f, 80.0f);
+		this->AddNode(-504.0f, 452.0f);*/

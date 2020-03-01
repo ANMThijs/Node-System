@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{099f5afb-99e4-4d82-b805-5e82c31e9ef0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{916e62ce-4c43-4888-816c-f6f219fbf4b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -33,14 +36,17 @@
     <ClCompile Include="Wire.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Win.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="WireManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShapePresets.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Win.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbar.cpp">
+      <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,14 +62,17 @@
     <ClInclude Include="Wire.h">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Win.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="WireManager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ShapePresets.h">
       <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Win.h">
+      <Filter>Source Files\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolbar.h">
+      <Filter>Source Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "Letters.h"
 #include "WireManager.h"
 #include "ShapePresets.h"
+#include "Toolbar.h"
 
 #define HK_VPMODE_DEFAULT 100
 #define HK_VPMODE_DRAW_NODE 101
@@ -31,6 +32,7 @@ private:
 	Node* nodes;
 	WireManager wm;
 	Wire RealTimeWire;
+	Toolbar tb;
 
 	int nodecount; //starts at 1
 	int nodesel;   //starts at 0. Set to -1 if no nodes are selected

@@ -5,10 +5,10 @@ Todo:
 	 *Shortcut for creating Wires						25-2
 	 *Deleting wires									27-2
 	 *Realtime wire drawing								27-2
-	 *Toolbar
-	 *Box select
+	 *Toolbar											
+	 *Box select										27-2
 	 *Text
 	 *File system
 
 	-Bugs:
-	 *Clicking stacked nodes selects both
+	 *Wires are deleted wrong
