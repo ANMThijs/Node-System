@@ -1,5 +1,9 @@
 #include "Engine.h"
 
+void Engine::DefaultSetup() {
+
+}
+
 Engine::Engine() {
 
 }
@@ -36,23 +40,36 @@ void Engine::Init() {
 
 void Engine::Destroy() {
 	delete[] this->nodes;
+	this->wm.Destroy();
 }
 
 void Engine::AddNode(Node n) {
-	n.ID = this->nodecount;
-	this->nodes[this->nodecount] = n;
-	this->nodecount++;
+	if (this->nodecount < 64) {
+		n.ID = this->nodecount;
+		this->nodes[this->nodecount] = n;
+		this->nodecount++;
+	}
+	else {
+		MessageBox(NULL, L"Too many nodes", L"Too many nodes", NULL);
+	}
 }
 
 void Engine::AddNode(float xpos, float ypos) {
-	Node n(xpos, ypos);
-	n.ID = this->nodecount;
-	this->nodes[this->nodecount] = n;
-	this->nodecount++;
+	if (this->nodecount < 64) {
+		Node n(xpos, ypos);
+		n.ID = this->nodecount;
+		this->nodes[this->nodecount] = n;
+		this->nodecount++;
+		printf("%i", this->nodecount);
+	}
+	else {
+		MessageBox(NULL, L"Too many nodes", L"Too many nodes", NULL);
+	}
 }
 
 void Engine::DeleteNode() {
 	this->wm.DeleteWire(this->nodes[this->nodesel]);
+	printf("%i", this->nodesel);
 	for (int i = 0; i < (this->nodecount - 1); i++) {
 		if (i >= this->nodesel) {
 			this->nodes[i] = this->nodes[i + 1];
@@ -196,10 +213,11 @@ void Engine::LMouseDown() {
 							this->nodesel = i;
 						}
 					}
+					this->wm.GetConnectedWires(this->nodes[i]);
 				}
 			}
 		}
-		if (this->nodeclicked == false) {
+		if ((this->nodeclicked == false) && !(GetKeyState('M') & 0x8000)) {
 			for (int i = 0; i < this->nodecount; i++) {
 				this->nodes[i].selected = false;
 				this->nodesel = -1;
@@ -308,7 +326,7 @@ void Engine::OnMouseMove() {
 					sel = 1;
 				}
 			}
-			if (this->nodeclicked == false) {
+			if ((this->nodeclicked == false) && (GetKeyState('B') & 0x8000)) {
 				this->selbox = true;
 				this->Render();
 			}
@@ -343,23 +361,10 @@ void Engine::OnKey() {
 			int* selnodes;
 			selnodes = this->GetSelNodes();
 			for (int i = 0; i < selnodec; i++) {
+				printf("%i", selnodes[i]);
 				this->DeleteNode(selnodes[i]);
 			}
 		}
 		this->Render();
 	}
 }
-
-
-/*	wm.AddWire(this->nodes[0], this->nodes[1]);
-	wm.AddWire(this->nodes[2], this->nodes[3]);
-	wm.AddWire(this->nodes[2], this->nodes[4]);
-	wm.AddWire(this->nodes[2], this->nodes[5]);*/
-
-	/*	this->AddNode(440.0f, 234.0f);
-		this->AddNode(240.0f, 342.0f);
-
-		this->AddNode(0.0f, 350.0f);
-		this->AddNode(733.0f, -260.0f);
-		this->AddNode(-780.0f, 80.0f);
-		this->AddNode(-504.0f, 452.0f);*/

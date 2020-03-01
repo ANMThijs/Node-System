@@ -11,4 +11,4 @@ Todo:
 	 *File system
 
 	-Bugs:
-	 *Wires are deleted wrong
+	 *Sometimes you can't draw a wire

@@ -19,6 +19,8 @@ public:
 
 	void Draw();
 	void Draw(float x1, float y1, float x2, float y2);
+
+	Wire& operator = (const Wire& w);
 };
 
 Wire* CopyWires(int wirecount, Wire* wires);

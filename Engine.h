@@ -64,4 +64,6 @@ public:
 	void OnHotKey(WPARAM wparam);
 	void OnMouseMove();
 	void OnKey();
+
+	void DefaultSetup();
 };

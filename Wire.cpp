@@ -213,6 +213,19 @@ void Wire::Draw(float x1, float y1, float x2, float y2) {
 	glEnd();
 }
 
+Wire& Wire::operator = (const Wire& w) {
+	this->startx = w.startx;
+	this->starty = w.starty;
+	this->endx = w.endx;
+	this->endy = w.endy;
+
+	this->NodeID1 = w.NodeID1;
+	this->NodeID2 = w.NodeID2;
+	this->init = w.init;
+
+	return *this;
+}
+
 Wire* CopyWires(int wirecount, Wire* wires) {
 	Wire* wire = new Wire[wirecount];
 	for (int i = 0; i < wirecount; i++) {

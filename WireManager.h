@@ -12,10 +12,12 @@ public:
 	WireManager();
 	~WireManager();
 
+	void Destroy();
+
 	void Init();
 	void AddWire(Node n1, Node n2);
+	void GetConnectedWires(Node n);
 	void DeleteWire(Node n);
-	void DeleteWire(Node n1, Node n2);
 	void UpdateWires(Node n);
 	void DrawWires();
 };
